@@ -1,0 +1,36 @@
+schema: '2.0'
+stages:
+  prepare_corpus:
+    cmd: python ml/data/prepare_corpus.py
+    deps:
+    - path: data/mtsamples
+      hash: md5
+      md5: a172325e539aa17684e073d39faac7f1.dir
+      size: 414
+      nfiles: 2
+    - path: ml/data/prepare_corpus.py
+      hash: md5
+      md5: e91cb491a71107f6bfadeb5e89d83a71
+      size: 1339
+    outs:
+    - path: data/gold_charts
+      hash: md5
+      md5: 4ae63122a5ac27428d4d77fd85e4c29d.dir
+      size: 542
+      nfiles: 3
+  prepare_icd10:
+    cmd: python ml/data/prepare_icd10.py
+    deps:
+    - path: data/icd10cm/icd10_demo.csv
+      hash: md5
+      md5: 19c0935acea0faf47bdc3a4ce0a4103f
+      size: 135
+    - path: ml/data/prepare_icd10.py
+      hash: md5
+      md5: b4963e374dc10c2791f6b8bde0dfc090
+      size: 577
+    outs:
+    - path: data/icd10cm/icd10_records.json
+      hash: md5
+      md5: 91e4f6e069fc15e427bd4070c3af0dbd
+      size: 267

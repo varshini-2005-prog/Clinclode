@@ -1,0 +1,16 @@
+stages:
+  prepare_corpus:
+    cmd: python ml/data/prepare_corpus.py
+    deps:
+      - ml/data/prepare_corpus.py
+      - data/mtsamples
+    outs:
+      - data/gold_charts
+
+  prepare_icd10:
+    cmd: python ml/data/prepare_icd10.py
+    deps:
+      - ml/data/prepare_icd10.py
+      - data/icd10cm/icd10_demo.csv
+    outs:
+      - data/icd10cm/icd10_records.json

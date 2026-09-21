@@ -1,0 +1,45 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: clinclode-postgres
+    environment:
+      POSTGRES_DB: clinclode
+      POSTGRES_USER: clinclode
+      POSTGRES_PASSWORD: clinclode
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: clinclode-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: clinclode-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: clinclode-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_data:/mlruns
+    command: mlflow server --host 0.0.0.0 --port 5000 --default-artifact-root /mlruns
+
+volumes:
+  postgres_data:
+  redis_data:
+  qdrant_data:
+  mlflow_data:
